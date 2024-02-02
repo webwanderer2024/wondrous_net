@@ -4,6 +4,7 @@ def solve_clocks(clocks_data,n):
     """Function, which exctracts messages from clocks for "Mr. Game & Watch" puzzle from MUMS Puzzle Hunt 2011:
        English - https://wondrousnet.blogspot.com/2024/01/solution-to-puzzle-mr-game-watch.html 
        Russian - https://wondrousnet.blogspot.com/2024/01/mr-game-watch.html
+
        Input:
            clocks_data: list or tuple of tuples, each of which represents one corresponding clock; each tuple consists of four parts:
                1) integer from 0 to 11 - number of hours
