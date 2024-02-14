@@ -2,7 +2,10 @@ import string
 
 def solve_clocks(clocks_data,n):
     """Function, which exctracts messages from clocks for "Mr. Game & Watch" puzzle from MUMS Puzzle Hunt 2011:
-       Puzzle - https://www.melbunimathsstats.org/_files/ugd/28c6de_e5c711a5801549928d882742358a23e5.pdf
+    
+       Puzzle - https://web.archive.org/web/20140401194553/http://www.ms.unimelb.edu.au/~mums/puzzlehunt/2011/puzzles/Act4.pdf
+       Solution - https://web.archive.org/web/20140401194601/http://www.ms.unimelb.edu.au/~mums/puzzlehunt/2011/answers.html?puzzle=4.1
+       
        English explanation - https://wondrousnet.blogspot.com/2024/01/solution-to-puzzle-mr-game-watch.html 
        Russian explanation - https://wondrousnet.blogspot.com/2024/01/mr-game-watch.html
 
