@@ -2,8 +2,9 @@ import string
 
 def solve_clocks(clocks_data,n):
     """Function, which exctracts messages from clocks for "Mr. Game & Watch" puzzle from MUMS Puzzle Hunt 2011:
-       English - https://wondrousnet.blogspot.com/2024/01/solution-to-puzzle-mr-game-watch.html 
-       Russian - https://wondrousnet.blogspot.com/2024/01/mr-game-watch.html
+       Puzzle - https://www.melbunimathsstats.org/_files/ugd/28c6de_e5c711a5801549928d882742358a23e5.pdf
+       English explanation - https://wondrousnet.blogspot.com/2024/01/solution-to-puzzle-mr-game-watch.html 
+       Russian explanation - https://wondrousnet.blogspot.com/2024/01/mr-game-watch.html
 
        Input:
            clocks_data: list or tuple of tuples, each of which represents one corresponding clock; each tuple consists of four parts:
