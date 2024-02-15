@@ -1,13 +1,9 @@
 import string
 
 def solve_clocks(clocks_data,n):
-    """Function, which exctracts messages from clocks for "Mr. Game & Watch" puzzle from MUMS Puzzle Hunt 2011:
-    
-       Puzzle - https://web.archive.org/web/20140401194553/http://www.ms.unimelb.edu.au/~mums/puzzlehunt/2011/puzzles/Act4.pdf
-       Solution - https://web.archive.org/web/20140401194601/http://www.ms.unimelb.edu.au/~mums/puzzlehunt/2011/answers.html?puzzle=4.1
-       
-       English explanation - https://wondrousnet.blogspot.com/2024/01/solution-to-puzzle-mr-game-watch.html 
-       Russian explanation - https://wondrousnet.blogspot.com/2024/01/mr-game-watch.html
+    """Function, which exctracts messages from clocks for "Mr. Game & Watch" puzzle from MUMS Puzzle Hunt 2011:     
+       English - https://wondrousnet.blogspot.com/2024/01/solution-to-puzzle-mr-game-watch.html 
+       Russian - https://wondrousnet.blogspot.com/2024/01/mr-game-watch.html
 
        Input:
            clocks_data: list or tuple of tuples, each of which represents one corresponding clock; each tuple consists of four parts:
