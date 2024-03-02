@@ -59,12 +59,12 @@ def solve_clocks(clocks_data,n):
 
 
 #representation of clocks from puzzle
-clocks_data = [(1,'am',69.47564,True),(0,'pm',29.35372,True),(4,'pm',-8.70545,True),(8,'am',-128.60642,True),
+clocks_data = ((1,'am',69.47564,True),(0,'pm',29.35372,True),(4,'pm',-8.70545,True),(8,'am',-128.60642,True),
                (1,'am',-0.66474,True),(2,'am',-32.37728,True),(5,'am',-104.12833,True),(8,'pm',148.35595,False),
                (9,'am',-169.34332,True),(7,'pm',-160.02279,True),(5,'am',-98.75045,True),(3,'am',-82.73052,True),
                (0,'pm',71.59333,True),(3,'pm',-60.38542,True),(3,'am',20.48941,True),(11,'am',59.18092,False),
                (7,'pm',-137.11121,True),(1,'am',59.86097,True),(2,'pm',24.33518,True),(4,'am',-8.80010,True),
-               (8,'pm',-134.47923,True),(8,'am',164.75629,False),(5,'am',-44.09744,True),(2,'pm',40.46877,True)]
+               (8,'pm',-134.47923,True),(8,'am',164.75629,False),(5,'am',-44.09744,True),(2,'pm',40.46877,True))
 
 
 if __name__ == '__main__':
