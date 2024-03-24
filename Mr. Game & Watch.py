@@ -1,7 +1,7 @@
 import string
 
 def solve_clocks(clocks_data,n):
-    """Function, which exctracts messages from clocks for "Mr. Game & Watch" puzzle from MUMS Puzzle Hunt 2011:     
+    """Function that extracts messages from clocks for puzzle "Mr. Game & Watch" from MUMS Puzzle Hunt 2011 competition:     
        English - https://wondrousnet.blogspot.com/2024/01/solution-to-puzzle-mr-game-watch.html 
        Russian - https://wondrousnet.blogspot.com/2024/01/mr-game-watch.html
 
