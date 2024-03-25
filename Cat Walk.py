@@ -374,7 +374,7 @@ gray_palette = ('gray',)
 rbg_palette = ('red','blue','green')
 
 if __name__ == '__main__':
-    # generate maze in the puzzle
+    # generate the maze in the puzzle
     maze = generate_maze(num_cols, num_rows, imaginary_cells,
                          cells_with_right_border_inside_maze, cells_with_left_border, cells_with_right_border,
                          cells_with_right_gate_by_colours, cells_with_upper_gate_by_colours)
