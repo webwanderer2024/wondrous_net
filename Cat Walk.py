@@ -21,7 +21,7 @@ def generate_maze(num_cols, num_rows, imaginary_cells,
         Returns:
             dictionary that represent maze; it's keys are tuples of two integers, which represent cells and it's values are dictionaries;
             keys of that dictionaries are strings, represented movements, available for each cell: it can be 'up', 'down', 'right' or 'left';
-            values of that dictionaries correspond to gates, associated with each movement:
+            values of that dictionaries correspond to the gates, associated with each movement:
                 if movement associated with passage of the coloured gate, than value of the key will be string, that is the colour of that gate;
                 otherwise, value of the key will be None."""    
     for cell in cells_with_right_border_inside_maze:
