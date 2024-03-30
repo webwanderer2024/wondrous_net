@@ -4,6 +4,7 @@ def generate_maze(num_cols, num_rows, imaginary_cells,
                   cells_with_right_border_inside_maze, cells_with_left_border, cells_with_right_border,
                   cells_with_right_gate_by_colours, cells_with_upper_gate_by_colours):
     """Function that can create representation of the maze for puzzle Cat Walk from MUMS Puzzle Hunt 2012 competition.
+       English - https://wondrousnet.blogspot.com/2024/03/solution-to-puzzle-cat-walk.html
        Russian - https://wondrousnet.blogspot.com/2024/03/cat-walk.html
        Input:
            num_cols - integer, number of columns in the maze;
