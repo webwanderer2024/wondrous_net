@@ -25,9 +25,9 @@ def generate_maze(num_cols, num_rows, imaginary_cells,
                 if movement associated with passage of the coloured gate, than value of the key will be string, that is the colour of that gate;
                 otherwise, value of the key will be None."""    
     for cell in cells_with_right_border_inside_maze:
-        # create a complite tuple of cells with right border
+        # extend the tuple of cells with right border
         cells_with_right_border += (cell,)
-        # create a complite tuple of cells with left border
+        # extend the tuple of cells with left border
         cells_with_left_border += ((cell[0]+1,cell[1]),)
         
     cells_with_right_gate = {}
