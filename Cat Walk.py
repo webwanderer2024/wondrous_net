@@ -18,7 +18,7 @@ def generate_maze(num_cols, num_rows, imaginary_cells,
                and values are lists or tuples of tuples of two integers, each of which represent one cell, that has a right gate of the colour of the key;
            cells_with_upper_gate_by_colours - dictionary, where keys are strings, that correspond to the colours of the gates between cells,
                and values are lists or tuples of tuples of two integers, each of which represent one cell, that has an upper gate of the colour of the key.
-        Returns:
+        Output:
             dictionary that represent maze; it's keys are tuples of two integers, which represent cells and it's values are dictionaries;
             keys of that dictionaries are strings, represented movements, available for each cell: it can be 'up', 'down', 'right' or 'left';
             values of that dictionaries correspond to the gates, associated with each movement:
@@ -82,7 +82,7 @@ def search(maze, start_cells, goal_cells, palette):
            start_cells - list or tuple of tuples of two integers, collection of the start cells;
            goal_cells - list or tuple of tuples of two integers, collection of the goal cells;
            palette - tuple or list of strings, collection of the colours of the gates in definite order.
-       Returns:
+       Output:
            if some search is successful - return phrase corresponding to that search;
            if all searches are failed - return False."""
     # get colour of the first gate
@@ -108,7 +108,7 @@ def depth_first_search(maze, current_cell, goal_cells, path, current_colour, pal
            current_colour - string, colour of the next coloured gate on the path;
            palette - tuple or list of strings, collection of the colours of the gates in definite order;
            current_phrase - string, it's a phrase, generated  so far.
-       Returns:
+       Output:
            if search is successful, function will return string, that is a generated phrase;
            otherwise it will return False."""
     path += (current_cell,)
@@ -134,7 +134,7 @@ def get_near_cells_with_letters_and_colours(maze, cell, colour, palette):
             cell - tuple of two integers, current cell;
             colour - string, represented colour of the next coloured gate;
             palette - tuple or list of strings, collection of the colours of the gates in definite order;
-       Returns:
+       Output:
            tuple of tuples, each of which consists of three parts:
                1) tuple of two integers - one of the near cells;
                2) string: if movement to that cell passes through vertical coloured gate, than this string will be one upper-case letter,
@@ -179,7 +179,7 @@ def get_next_colour(palette, colour):
        Input:
            palette - list or tuple of strings, each of which represent one colour;
            colour - string, represented one colour;
-       Resturns:
+       Output:
            if colour in the palette:
                if colour is a last colour in the palette - returns first colour in the palette,
                otherwise - returns colour in the palette after given colour;
