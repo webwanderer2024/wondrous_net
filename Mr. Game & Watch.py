@@ -14,7 +14,7 @@ def solve_clocks(clocks_data,n):
                   if True, then a simpler formula is used: minutes = (2/11)*(30*hours + angle);
                   if False, then a little bit more complex formula is used: minutes = (2/11)*(30*hours + angle - 360).
            n - integer: number of exctracted messages.
-       Returns:
+       Output:
            string of uppercase messages for corresponding time values separated by the new line symbol."""
     
     all_clocks_values = []
