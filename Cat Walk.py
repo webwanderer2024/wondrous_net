@@ -102,7 +102,7 @@ def depth_first_search(maze, current_cell, goal_cells, path, current_colour, pal
            maze - dictionary represented the maze: it's keys are tuples of two integers, represented cells;
                it's values are dictionaries, where keys are strings of available movements ('up', 'down', 'left' or 'right')
                and values are colours of the gates associated with that movemets (strings, represented colours, or None);
-           current_cell - tuple of two integers, current cell in the search;
+           current_cell - tuple of two integers, current cell of search;
            goal_cells - list or tuple of tuples of two integers, collection of the goal cells;
            path - tuple of tuples of two integers: all cells on the path, made so far;
            current_colour - string, colour of the next coloured gate on the path;
