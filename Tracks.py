@@ -180,7 +180,7 @@ finish = (15,5)
 def extract_message(grid, path):
     """Function that extract message from the given grid according to the given path.
        Input:
-           grid - tuple of tuples of the same size, that consist of integers and None-values: representation of the given grid;
+           grid - list or tuple of tuples of the same size, that consist of integers and None-values: representation of the given grid;
            path - tuple of tuples of two integers: path from the corresponding grid of the puzzle.
        Output:
            string - exctracted message: if path moved through a cell of the grid and that cell is not empty,
