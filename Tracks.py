@@ -135,6 +135,7 @@ def find_adjacent_cells_with_constr(cell, finish, num_cols, num_rows, cols_in_le
                 # if value of constraints for the next col will be zero after update,
                 # and there is some col on the direction, opposite to the finish cell from the next col, with non-zero value of constraints,
                 # than this path can't led to solution and should be abandoned
+                # (if the next col coincide with a col for the finish cell, than both directions from this col treated as opposite)
                 if next_col_value == 1:
                     finish_col = finish[0]
                     if (next_col <= finish_col and not satisfied(cols_constr[:next_col]) or (next_col >= finish_col and not satisfied(cols_constr[next_col+1:]))):
@@ -144,6 +145,7 @@ def find_adjacent_cells_with_constr(cell, finish, num_cols, num_rows, cols_in_le
                 # and value of inactive constraints for that row is also equal to zero,
                 # and there is some row on the direction, opposite to the finish cell from the next row, with non-zero value of active or inactive constraints,
                 # than this path can't led to solution and should be abandoned
+                # (if the next row coincide with a row for the finish cell, than both directions from this row treated as opposite)
                 if next_row_value == 1 and inactive_rows_constr_for_move[next_row] == 0:
                     finish_row = finish[1]
                     if ((next_row <= finish_row and
