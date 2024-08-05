@@ -1,7 +1,6 @@
 def search(start, finish, cols_in_left_part, cols_constr, left_rows_constr, right_rows_constr):
     """Function that can find a path in the grid for the puzzle Tracks from MUMS Puzzle Hunt 2008 competition.
        Russian - https://wondrousnet.blogspot.com/2024/04/blog-post.html
-       English - https://wondrousnet.blogspot.com/2024/05/solution-to-puzzle-tracks.html
        Input:
            start - tuple of two integers: start cell of the grid;
            finish - tuple of two integers: finish cell of the grid;
