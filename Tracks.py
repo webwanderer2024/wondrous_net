@@ -112,7 +112,7 @@ def find_adjacent_cells_with_constr(cell, finish, num_cols, num_rows, cols_in_le
             # extract values of constraints for the next col and next row
             next_col_value = cols_constr[next_col]
             next_row_value = next_active_rows_constr[next_row]
-            # move is possible
+            # constraints allow to make the move
             if next_col_value > 0 and next_row_value > 0:
                 # if value of constraints for the next col will be zero after move,
                 # and there is some col before the next col and finish col or after the next col and finish col
