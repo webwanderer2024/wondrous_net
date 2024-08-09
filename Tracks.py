@@ -121,9 +121,9 @@ def find_adjacent_cells_with_constr(cell, finish, num_cols, num_rows, cols_in_le
                 # than this path can't led to solution and should be abandoned
                 if next_col_value == 1:
                     finish_col = finish[0]
-                    if ((next_col <= finish_col and sum(cols_constr[:next_col]) > 0
-                         or
-                        (next_col >= finish_col and sum(cols_constr[next_col+1:])) > 0)):
+                    if (next_col <= finish_col and sum(cols_constr[:next_col])>0
+                        or
+                        next_col >= finish_col and sum(cols_constr[next_col+1:])>0):
                         continue
                 # if value of active constraints for the next row will be zero after move,
                 # and value of inactive constraints for that row is also equal to zero,
@@ -132,12 +132,12 @@ def find_adjacent_cells_with_constr(cell, finish, num_cols, num_rows, cols_in_le
                 # than this path can't led to solution and should be abandoned
                 if next_row_value == 1 and next_inactive_rows_constr[next_row] == 0:
                     finish_row = finish[1]
-                    if ((next_row <= finish_row and
-                        (sum(next_active_rows_constr[:next_row])>0 or sum(next_inactive_rows_constr[:next_row])>0))
+                    if (next_row <= finish_row and
+                        (sum(next_active_rows_constr[:next_row])>0 or sum(next_inactive_rows_constr[:next_row])>0)
                         or
-                        (next_row >= finish_row and
-                        (sum(next_active_rows_constr[next_row+1:])>0 or sum(next_inactive_rows_constr[next_row+1:])>0))):
-                        continue                
+                        next_row >= finish_row and
+                        (sum(next_active_rows_constr[next_row+1:])>0 or sum(next_inactive_rows_constr[next_row+1:])>0)):
+                        continue                   
                 adjacent_cell = (next_col, next_row)
                 next_cols_constr = list(cols_constr)
                 next_active_rows_constr = list(next_active_rows_constr)
