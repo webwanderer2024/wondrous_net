@@ -191,11 +191,11 @@ def extract_message(field, path):
 
 # bottom field from the puzzle, where 0 denotes an empty cell
 bottom_field = ((0,0,8,6,0,8,0,0,0,0,0,0,0,2,0,9),
-               (0,1,0,3,0,0,0,1,0,7,0,9,0,0,4,0),
-               (7,0,4,0,6,0,9,0,5,4,0,3,4,0,1,0),
-               (2,5,3,3,0,0,5,0,0,0,5,0,0,8,2,0),
-               (0,0,5,0,0,5,0,0,0,5,0,0,6,3,0,0),
-               (0,4,0,5,7,0,2,7,8,9,0,8,2,0,0,2))
+                (0,1,0,3,0,0,0,1,0,7,0,9,0,0,4,0),
+                (7,0,4,0,6,0,9,0,5,4,0,3,4,0,1,0),
+                (2,5,3,3,0,0,5,0,0,0,5,0,0,8,2,0),
+                (0,0,5,0,0,5,0,0,0,5,0,0,6,3,0,0),
+                (0,4,0,5,7,0,2,7,8,9,0,8,2,0,0,2))
 
 if __name__ == '__main__':
     # find path in the upper field and extract and print corresponding message from the bottom field of the puzzle
