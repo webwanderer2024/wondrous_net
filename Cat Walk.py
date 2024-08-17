@@ -166,7 +166,6 @@ def get_near_cells_with_letters_and_colours(maze, cell, colour, palette):
 
 # number of columns in the maze
 num_cols = 26
-
 # number of rows in the maze;
 # actually, the maze in the puzzle contains 20 rows, but for search in it one more row is added on the top,
 # that contains real cells after exits from the maze and imaginary cells in all other positions
@@ -341,7 +340,6 @@ goal_cells = ((4,20),(7,20),(11,20),(17,20),(19,20),(21,20),(24,20))
 
 # colours of gates for the first message
 gray_palette = {'gray':'gray'}
-
 # colours of gates for the second message
 rbg_palette = {'red':'blue','blue':'green','green':'red'}
 
