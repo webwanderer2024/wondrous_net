@@ -70,7 +70,7 @@ def search(maze, start_cells, goal_cells, palette, first_colour):
     """Function that perform depth-first search in the maze from the multiple start cells to the goal cells
        according to the colours in palette and first colour.
        Input:
-           maze - dictionary represented the maze: it's keys are tuples of two integers, represented cells;
+           maze - dictionary represented a maze: it's keys are tuples of two integers, represented cells;
                it's values are dictionaries, where keys are strings of available movements ('up', 'down', 'left' or 'right')
                and values are colours of the gates associated with that movements (strings represented colours or None);
            start_cells - list or tuple of tuples of two integers, collection of the starting cells;
@@ -90,7 +90,7 @@ def depth_first_search(maze, current_cell, goal_cells, path, current_colour, pal
     """Function that performs search in depth-first fashion in the maze from the current_cell to the goal_cells
        according to the current_colour of the gate and following colours of the gates in palette.
        Input:
-           maze - dictionary represented the maze: it's keys are tuples of two integers, represented cells;
+           maze - dictionary represented a maze: it's keys are tuples of two integers, represented cells;
                it's values are dictionaries, where keys are strings of available movements ('up', 'down', 'left' or 'right')
                and values are colours of the gates associated with that movements (strings represented colours or None);
            current_cell - tuple of two integers, current cell of search;
@@ -120,7 +120,7 @@ def get_near_cells_with_letters_and_colours(maze, cell, colour, palette):
     """Function that for the current cell and current colour will find available near cells,
        and also letters of the message and next colours, associated with passage to that cells.
        Input:
-           maze - dictionary represented the maze: it's keys are tuples of two integers, represented cells;
+           maze - dictionary represented a maze: it's keys are tuples of two integers, represented cells;
                it's values are dictionaries, where keys are strings of available movements ('up', 'down', 'left' or 'right')
                and values are colours of the gates associated with that movements (strings represented colours or None);
            cell - tuple of two integers, current cell;
@@ -129,7 +129,7 @@ def get_near_cells_with_letters_and_colours(maze, cell, colour, palette):
        Output:
            tuple of tuples, each of which consists of three parts:
            1) tuple of two integers - one of the near cells;
-           2) string: if movement to that cell passes through vertical coloured gate, than this string will be one upper-case letter,
+           2) string: if movement to that cell passes through vertical gate, than this string will be one upper-case letter,
               that correspond to the column-number of that cell; otherwise it will be empty string;
            3) string - following colour of the gate."""
     col = cell[0]
