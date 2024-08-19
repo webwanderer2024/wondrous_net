@@ -76,7 +76,7 @@ def search(maze, start_cells, goal_cells, palette, first_colour):
            start_cells - list or tuple of tuples of two integers, collection of the starting cells;
            goal_cells - list or tuple of tuples of two integers, collection of the goal cells;
            palette - dictionary, consisted of strings, where keys are colours for the path and values are corresponding next colours;
-           first_colour - string, colour of the first coloured gate from palette.
+           first_colour - string, colour of the first coloured gate from the palette.
        Output:
            if some search is successful - return phrase corresponding to that search;
            if all searches are failed - return False."""
