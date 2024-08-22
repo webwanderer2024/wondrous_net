@@ -64,7 +64,7 @@ def depth_first_search(current_cell, finish, num_cols, num_rows, cols_in_left_pa
             if adjacent_cell not in current_path:
                 path = depth_first_search(adjacent_cell, finish, num_cols, num_rows, cols_in_left_part,
                                           next_cols_constr, next_active_rows_constr, next_inactive_rows_constr, current_path)
-                if path != False:
+                if path:
                     return path
     return False
         
