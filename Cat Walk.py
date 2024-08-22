@@ -112,7 +112,7 @@ def depth_first_search(maze, current_cell, goal_cells, path, current_colour, pal
             if cell not in path:
                 extended_phrase = current_phrase + letter
                 phrase = depth_first_search(maze, cell, goal_cells, path, colour, palette, extended_phrase)
-                if phrase != False:
+                if phrase:
                     return(phrase)
     return False
                     
