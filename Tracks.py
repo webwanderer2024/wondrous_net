@@ -86,28 +86,28 @@ def find_adjacent_cells_with_constr(cell, finish, num_cols, num_rows, cols_in_le
                2) list of integers: constraints for the cols of the field, corresponding to passage to that cell;
                3) list of integers: active constraints for the rows of the field, corresponding to passage to that cell;
                4) list of integers: inactive constraints for the rows of the field, corresponding to passage to that cell."""
-    cell_col, cell_row = cell[0], cell[1]
+    col, row = cell[0], cell[1]
     adjacent_cells_with_constr = ()
     for direction in ('horizontal','vertical'):
         for move in (+1,-1):
             next_active_rows_constr = active_rows_constr
             next_inactive_rows_constr = inactive_rows_constr
             if direction == 'horizontal':
-                next_col = cell_col + move
+                next_col = col + move
                 #next col is inside field
                 if next_col >= 0 and next_col < num_cols:
-                    next_row = cell_row
+                    next_row = row
                 else:
                     continue
                 # we move from the left part of the field to the right, or from right to the left;
                 # so we should swap active and inactive constraints for the rows
-                if (cell_col == cols_in_left_part - 1 and move == +1) or (cell_col == cols_in_left_part and move == -1):
+                if (col == cols_in_left_part - 1 and move == +1) or (col == cols_in_left_part and move == -1):
                     next_active_rows_constr, next_inactive_rows_constr = next_inactive_rows_constr, next_active_rows_constr                 
             elif direction == 'vertical':
-                next_row = cell_row + move
+                next_row = row + move
                 # next row is inside field
                 if next_row >=0 and next_row < num_rows:
-                    next_col = cell_col
+                    next_col = col
                 else:
                     continue
             # extract values of constraints for the next col and next row
