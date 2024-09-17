@@ -1,5 +1,6 @@
 def solve_grids(grids, strips, outlines_per_row):
     """Function for solving grids for puzzle Black and White from MUMS Puzzle Hunt 2010 competition.
+       Russian - https://wondrousnet.blogspot.com/2024/09/black-and-white.html
        Input:
            grids - tuple of tuples of strings, where each tuple represent one grid, and each string represent one row of that grid;
            each symbol of a string denote colour of the corresponding cell of the grid ('w' for white and 'b' for black).
