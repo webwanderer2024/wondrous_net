@@ -174,8 +174,6 @@ def get_output(outlines, outlines_per_row):
            string, where outlines of the placings arranged in outlines_per_row outlines in one row with one space between them,
            and there is a new line after each horizontal level of one row and between different rows."""
     outlines_len = len(outlines)
-    # number of horizontal levels in one row
-    num_levels = len(outlines[0])
     output = ''
     # determine starting index for every row
     for first_index in range(0, outlines_len, outlines_per_row):
@@ -184,8 +182,10 @@ def get_output(outlines, outlines_per_row):
         one_row = outlines[first_index]
         for current_outline in outlines[first_index+1:last_index]:
             # add current outline to row
-            for level_index in range(num_levels):
-                one_row[level_index] += ' ' + current_outline[level_index]
+            level_index = 0
+            for level in current_outline:
+                one_row[level_index] += ' ' + level
+                level_index += 1
         for level in one_row:
             output += level + '\n'
     return output
