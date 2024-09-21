@@ -105,16 +105,20 @@ def get_strip_positions(strip, num_cols, num_rows):
         for col in range(num_cols - strip_len + 1):
             for pattern in patterns:
                 position = {}
-                for strip_index in range(strip_len):
-                    position[(col + strip_index, row)] = pattern[strip_index]
+                current_col = col
+                for colour in pattern:
+                    position[(current_col, row)] = colour
+                    current_col += 1
                 yield (position, ((col,row),'horizontal',strip_len))
     # generate vertical placings of the strip 
     for col in range(num_cols):
         for row in range(num_rows - strip_len + 1):
             for pattern in patterns:
                 position = {}
-                for strip_index in range(strip_len):
-                    position[(col, row + strip_index)] = pattern[strip_index]
+                current_row = row
+                for colour in pattern:
+                    position[(col, current_row)] = colour
+                    current_row += 1
                 yield (position, ((col,row),'vertical',strip_len))
             
 def get_placing_outline(placing, num_cols, num_rows):
@@ -175,10 +179,10 @@ def get_output(outlines, outlines_per_row):
     output = ''
     # determine starting index for every row
     for first_index in range(0, outlines_len, outlines_per_row):
+        last_index = min(first_index + outlines_per_row, outlines_len)
         # add first outline to row
         one_row = outlines[first_index]
-        for current_index in range(first_index + 1, min(first_index + outlines_per_row, outlines_len)):
-            current_outline = outlines[current_index]
+        for current_outline in outlines[first_index+1:last_index]:
             # add current outline to row
             for level_index in range(num_levels):
                 one_row[level_index] += ' ' + current_outline[level_index]
