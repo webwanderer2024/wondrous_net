@@ -180,8 +180,8 @@ def get_output(outlines, outlines_per_row):
         last_index = min(first_index + outlines_per_row, outlines_len)
         # add first outline to row
         one_row = outlines[first_index]
+        # add other outlines to row
         for current_outline in outlines[first_index+1:last_index]:
-            # add current outline to row
             level_index = 0
             for level in current_outline:
                 one_row[level_index] += ' ' + level
