@@ -178,9 +178,9 @@ def get_output(outlines, outlines_per_row):
     # determine starting index for every row
     for first_index in range(0, outlines_len, outlines_per_row):
         last_index = min(first_index + outlines_per_row, outlines_len)
-        # add first outline to row
+        # add first outline to the row
         one_row = outlines[first_index]
-        # add other outlines to row
+        # add other outlines to the row
         for current_outline in outlines[first_index+1:last_index]:
             level_index = 0
             for level in current_outline:
