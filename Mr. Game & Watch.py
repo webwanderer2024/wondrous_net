@@ -23,19 +23,18 @@ def solve_clocks(clocks_data,n):
             hours = clock[0]
         elif clock[1] == 'pm':
             hours = 12 + clock[0]
+        # add value for hours
         clock_values.append(hours)
         if clock[3]:
             minutes_value = (2/11)*(30*clock[0] + clock[2])
         else:
             minutes_value = (2/11)*(30*clock[0] + clock[2] - 360)
         current_value = minutes_value
-        actual_time = int(minutes_value)
-        clock_values.append(actual_time) # add value for minutes
         # compute and add smoller time values
-        for i in range(n-2):
-            current_value = (current_value - actual_time)*60
+        for i in range(n-1):
             actual_time = int(current_value)
             clock_values.append(actual_time)
+            current_value = (current_value - actual_time)*60
         all_clocks_values.append(clock_values)
     all_messages = ''
     letters = string.ascii_uppercase
@@ -55,7 +54,7 @@ def solve_clocks(clocks_data,n):
         all_messages += (message + '\n')
     return all_messages
 
-#representation of the clocks from puzzle
+#representation of the clocks from the puzzle
 clocks_data = ((1,'am',69.47564,True),(0,'pm',29.35372,True),(4,'pm',-8.70545,True),(8,'am',-128.60642,True),
                (1,'am',-0.66474,True),(2,'am',-32.37728,True),(5,'am',-104.12833,True),(8,'pm',148.35595,False),
                (9,'am',-169.34332,True),(7,'pm',-160.02279,True),(5,'am',-98.75045,True),(3,'am',-82.73052,True),
