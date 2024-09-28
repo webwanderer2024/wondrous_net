@@ -48,28 +48,27 @@ def depth_first_search(current_cell, finish, num_cols, num_rows, cols_in_left_pa
            inactive_rows_constr - list of integers: inactive constraints for the rows of the field;
            current_path - tuple of tuples of two integers: path made so far from the start cell.
        Output:
-           if search is successful, function will return tuple of tuples of two integers: path from the start cell to the finish cell;
-           otherwise function will return False."""
+           if search is successful, the function will return tuple of tuples of two integers: path from the start cell to the finish cell;
+           otherwise the function will return False."""
     current_path += (current_cell,)
     # if current cell is a finish cell and constraints satisfied, than path is found;
     # it is sufficient to check only constraints for the cols, because if they are satisfied, than constraints for the rows are also satisfied
     if current_cell == finish and sum(cols_constr) == 0:
         return current_path
-    else:
-        # find adjacent cells for the current cell with corresponding constraints
-        adjacent_cells_with_constr = find_adjacent_cells_with_constr(current_cell, finish, num_cols, num_rows, cols_in_left_part,
-                                                                     cols_constr, active_rows_constr, inactive_rows_constr)
-        for (adjacent_cell, next_cols_constr, next_active_rows_constr, next_inactive_rows_constr) in adjacent_cells_with_constr:
-            # we assume, that path is acyclic
-            if adjacent_cell not in current_path:
-                path = depth_first_search(adjacent_cell, finish, num_cols, num_rows, cols_in_left_part,
-                                          next_cols_constr, next_active_rows_constr, next_inactive_rows_constr, current_path)
-                if path:
-                    return path
+    # find adjacent cells for the current cell with corresponding constraints
+    adjacent_cells_with_constr = find_adjacent_cells_with_constr(current_cell, finish, num_cols, num_rows, cols_in_left_part,
+                                                                 cols_constr, active_rows_constr, inactive_rows_constr)
+    for (adjacent_cell, next_cols_constr, next_active_rows_constr, next_inactive_rows_constr) in adjacent_cells_with_constr:
+        # we assume, that path is acyclic
+        if adjacent_cell not in current_path:
+            path = depth_first_search(adjacent_cell, finish, num_cols, num_rows, cols_in_left_part,
+                                        next_cols_constr, next_active_rows_constr, next_inactive_rows_constr, current_path)
+            if path:
+                return path
     return False
         
 def find_adjacent_cells_with_constr(cell, finish, num_cols, num_rows, cols_in_left_part, cols_constr, active_rows_constr, inactive_rows_constr):
-    """Function that for a given cell, in accordance with the given constraints, will find set of possible adjacent cells, perspective for subsequent search,
+    """Function that for the given cell, in accordance with the given constraints, will find set of possible adjacent cells, perspective for subsequent search,
        with constraints, corresponding to passage to that cells.
        Input:
            cell - tuple of two integers: given cell;
@@ -81,13 +80,12 @@ def find_adjacent_cells_with_constr(cell, finish, num_cols, num_rows, cols_in_le
            active_rows_constr - list of integers: active constraints for the rows of the field;
            inactive_rows_constr - list of integers: inactive constraints for the rows of the field.
        Output:
-           tuple of tuples, each of which consits of four parts:
+           generator that will yield tuples of four elements:
                1) tuple of two integers: adjacent cell;
                2) list of integers: constraints for the cols of the field, corresponding to passage to that cell;
                3) list of integers: active constraints for the rows of the field, corresponding to passage to that cell;
                4) list of integers: inactive constraints for the rows of the field, corresponding to passage to that cell."""
     col, row = cell[0], cell[1]
-    adjacent_cells_with_constr = ()
     for direction in ('horizontal','vertical'):
         for move in (+1,-1):
             next_active_rows_constr = active_rows_constr
@@ -143,8 +141,7 @@ def find_adjacent_cells_with_constr(cell, finish, num_cols, num_rows, cols_in_le
                 next_active_rows_constr = list(next_active_rows_constr)
                 next_cols_constr[next_col] -= 1
                 next_active_rows_constr[next_row] -= 1
-                adjacent_cells_with_constr += ((adjacent_cell, next_cols_constr, next_active_rows_constr, next_inactive_rows_constr),)
-    return adjacent_cells_with_constr
+                yield (adjacent_cell, next_cols_constr, next_active_rows_constr, next_inactive_rows_constr)
 
 # number of cols in the left part of the field
 cols_in_left_part = 8
