@@ -105,15 +105,13 @@ def depth_first_search(maze, current_cell, goal_cells, path, current_colour, pal
     path += (current_cell,)
     if current_cell in goal_cells:
         return current_phrase
-    else:
-        near_cells_with_letters_and_colours = get_near_cells_with_letters_and_colours(maze, current_cell, current_colour, palette)
-        for (cell, letter, colour) in near_cells_with_letters_and_colours:
-            # required path is acyclic
-            if cell not in path:
-                extended_phrase = current_phrase + letter
-                phrase = depth_first_search(maze, cell, goal_cells, path, colour, palette, extended_phrase)
-                if phrase:
-                    return(phrase)
+    for (cell, letter, colour) in get_near_cells_with_letters_and_colours(maze, current_cell, current_colour, palette):
+        # required path is acyclic
+        if cell not in path:
+            extended_phrase = current_phrase + letter
+            phrase = depth_first_search(maze, cell, goal_cells, path, colour, palette, extended_phrase)
+            if phrase:
+                return(phrase)
     return False
                     
 def get_near_cells_with_letters_and_colours(maze, cell, colour, palette):
@@ -127,14 +125,13 @@ def get_near_cells_with_letters_and_colours(maze, cell, colour, palette):
            colour - string, represented colour of the next coloured gate;
            palette - dictionary, consisted of strings, where keys are colours for the path and values are corresponding next colours;
        Output:
-           tuple of tuples, each of which consists of three parts:
+           generator that will yield tuples of three elements:
            1) tuple of two integers - one of the near cells;
            2) string: if movement to that cell passes through vertical gate, than this string will be one upper-case letter,
               that correspond to the column-number of that cell; otherwise it will be empty string;
            3) string - following colour of the gate."""
     col = cell[0]
     row = cell[1]
-    near_cells_with_letters_and_colours = ()
     for direction in maze[cell]:
         gate_colour = maze[cell][direction]
         # gate has the same colour
@@ -160,10 +157,9 @@ def get_near_cells_with_letters_and_colours(maze, cell, colour, palette):
         elif direction == 'left':
             near_cell = (col-1,row)
         elif direction == 'right':
-            near_cell = (col+1,row)            
-        near_cells_with_letters_and_colours += ((near_cell, letter, next_colour),)        
-    return near_cells_with_letters_and_colours
-
+            near_cell = (col+1,row)
+        yield (near_cell, letter, next_colour)
+  
 # number of columns in the maze
 num_cols = 26
 # number of rows in the maze;
