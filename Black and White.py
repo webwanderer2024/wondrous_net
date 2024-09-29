@@ -56,27 +56,26 @@ def depth_first_search(grid, num_cols, num_rows, strips, occupied_cells, placing
     if strips == ():
         # all strips are placed
         return placing
-    else:
-        # current strip of search
-        current_strip = strips[0]
-        # strips for further search
-        next_strips = strips[1:]
-        # position is used for search, representation is used for answer
-        for (position,representation) in get_strip_positions(current_strip, num_cols, num_rows):
-            position_is_possible = True
-            # check that position is possible
+    # current strip of search
+    current_strip = strips[0]
+    # strips for further search
+    next_strips = strips[1:]
+    # position is used for search, representation is used for answer
+    for (position,representation) in get_strip_positions(current_strip, num_cols, num_rows):
+        position_is_possible = True
+        # check that position is possible
+        for cell in position:
+            if position[cell] != grid[cell] or cell in occupied_cells:
+                position_is_possible = False
+                break
+        if position_is_possible:
+            next_occupied_cells = occupied_cells                        
             for cell in position:
-                if position[cell] != grid[cell] or cell in occupied_cells:
-                    position_is_possible = False
-                    break
-            if position_is_possible:
-                next_occupied_cells = occupied_cells                        
-                for cell in position:
-                    next_occupied_cells += (cell,)
-                next_placing = placing + (representation,)
-                final_placing = depth_first_search(grid, num_cols, num_rows, next_strips, next_occupied_cells, next_placing)
-                if final_placing:
-                    return final_placing
+                next_occupied_cells += (cell,)
+            next_placing = placing + (representation,)
+            final_placing = depth_first_search(grid, num_cols, num_rows, next_strips, next_occupied_cells, next_placing)
+            if final_placing:
+                return final_placing
     return False
 
 def get_strip_positions(strip, num_cols, num_rows):
