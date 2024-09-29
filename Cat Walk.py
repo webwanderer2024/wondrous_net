@@ -115,7 +115,7 @@ def depth_first_search(maze, current_cell, goal_cells, path, current_colour, pal
     return False
                     
 def get_near_cells_with_letters_and_colours(maze, cell, colour, palette):
-    """Function that for the current cell and current colour will find available near cells,
+    """Function that for the current cell and colour will find available near cells
        and also letters of the message and next colours, associated with passage to that cells.
        Input:
            maze - dictionary represented a maze: it's keys are tuples of two integers, represented cells;
