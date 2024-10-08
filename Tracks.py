@@ -31,27 +31,26 @@ def search(start, finish, cols_in_left_part, cols_constr, left_rows_constr, righ
         active_rows_constr[start_row] -= 1
     else:
         raise ValueError("Start cell shoud have non-zero values of constraints.")
-    path = depth_first_search(start, finish, num_cols, num_rows, cols_in_left_part,
-                              cols_constr, active_rows_constr, inactive_rows_constr, ())
+    path = depth_first_search((start,), finish, num_cols, num_rows, cols_in_left_part,
+                              cols_constr, active_rows_constr, inactive_rows_constr)
     return path
 
-def depth_first_search(current_cell, finish, num_cols, num_rows, cols_in_left_part, cols_constr, active_rows_constr, inactive_rows_constr, current_path):
+def depth_first_search(current_path, finish, num_cols, num_rows, cols_in_left_part, cols_constr, active_rows_constr, inactive_rows_constr):
     """Function that performs depth-first search in the field from a current cell to the finish cell, according to the given constraints.
        Input:
-           current_cell - tuple of two integers: current cell of search;
+           current_path - tuple of tuples of two integers: path made so far from the start cell;
            finish - tuple of two integers: goal cell of search;
            num_cols - integer: number of cols in the field;
            num_rows - integer: number of rows in the field;
            cols_in_left_part - integer: number of cols in the left part of the field;
            cols_constr - list of integers: constraints for the cols of the field;
            active_rows_constr - list of integers: active constraints for the rows of the field;
-           inactive_rows_constr - list of integers: inactive constraints for the rows of the field;
-           current_path - tuple of tuples of two integers: path made so far from the start cell.
+           inactive_rows_constr - list of integers: inactive constraints for the rows of the field.
        Output:
            if search is successful, the function will return tuple of tuples of two integers: path from the start cell to the finish cell;
            otherwise the function will return False."""
-    current_path += (current_cell,)
-    # if current cell is a finish cell and constraints satisfied, than path is found;
+    current_cell = current_path[-1]
+    # if current cell is a finish cell and constraints are satisfied, than path is found;
     # it is sufficient to check only constraints for the cols, because if they are satisfied, than constraints for the rows are also satisfied
     if current_cell == finish and sum(cols_constr) == 0:
         return current_path
@@ -61,8 +60,9 @@ def depth_first_search(current_cell, finish, num_cols, num_rows, cols_in_left_pa
     for (adjacent_cell, next_cols_constr, next_active_rows_constr, next_inactive_rows_constr) in adjacent_cells_with_constr:
         # we assume, that path is acyclic
         if adjacent_cell not in current_path:
-            path = depth_first_search(adjacent_cell, finish, num_cols, num_rows, cols_in_left_part,
-                                        next_cols_constr, next_active_rows_constr, next_inactive_rows_constr, current_path)
+            extended_path = current_path + (adjacent_cell,)
+            path = depth_first_search(extended_path, finish, num_cols, num_rows, cols_in_left_part,
+                                        next_cols_constr, next_active_rows_constr, next_inactive_rows_constr)
             if path:
                 return path
     return False
