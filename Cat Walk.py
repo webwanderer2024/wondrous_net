@@ -81,35 +81,35 @@ def search(maze, start_cells, goal_cells, palette, first_colour):
            if some search is successful - return phrase corresponding to that search;
            if all searches are failed - return False."""
     for cell in start_cells:
-        phrase = depth_first_search(maze, cell, goal_cells,(), first_colour, palette, '')
+        phrase = depth_first_search(maze, (cell,), goal_cells, first_colour, palette, '')
         if phrase:
             return phrase
     return False
 
-def depth_first_search(maze, current_cell, goal_cells, path, current_colour, palette, current_phrase):
+def depth_first_search(maze, path, goal_cells, current_colour, palette, current_phrase):
     """Function that performs search in depth-first fashion in the maze from the current_cell to the goal_cells
        according to the current_colour of the gate and following colours of the gates in palette.
        Input:
            maze - dictionary represented a maze: it's keys are tuples of two integers, represented cells;
                it's values are dictionaries, where keys are strings of available movements ('up', 'down', 'left' or 'right')
                and values are colours of the gates associated with that movements (strings represented colours or None);
-           current_cell - tuple of two integers, current cell of search;
-           goal_cells - list or tuple of tuples of two integers, collection of the goal cells;
            path - tuple of tuples of two integers: all cells on the path made so far;
+           goal_cells - list or tuple of tuples of two integers, collection of the goal cells;           
            current_colour - string, colour of the next coloured gate on the path;
            palette - dictionary, consisted of strings, where keys are colours for the path and values are corresponding next colours;
            current_phrase - string, it's a phrase, generated  so far.
        Output:
            if search is successful, function will return string, that is a generated phrase;
            otherwise it will return False."""
-    path += (current_cell,)
+    current_cell = path[-1]
     if current_cell in goal_cells:
         return current_phrase
     for (cell, letter, colour) in get_near_cells_with_letters_and_colours(maze, current_cell, current_colour, palette):
         # required path is acyclic
         if cell not in path:
+            extended_path = path + (cell,)
             extended_phrase = current_phrase + letter
-            phrase = depth_first_search(maze, cell, goal_cells, path, colour, palette, extended_phrase)
+            phrase = depth_first_search(maze, extended_path, goal_cells, colour, palette, extended_phrase)
             if phrase:
                 return(phrase)
     return False
