@@ -6,20 +6,19 @@ def solve_grids(grids, strips, outlines_per_row):
            grids - tuple of tuples of strings, where each tuple represent one grid, and each string represent one row of that grid;
            each symbol of a string denote colour of the corresponding cell of the grid ('w' for white and 'b' for black).
            strips - tuple of strings, where each string represent one strip;
-           each symbol of a string denote colour of the corresponding cell of the strip ('w' for white and 'b' for black).
+           each symbol of a string denote colour of the corresponding cell of a strip ('w' for white and 'b' for black).
            outlines_per_row - integer: amount of outlines of placings in one row of output.
        Output:
            If all grids are solved, then the function will return string of outlines of all placings,
            consisted of bars, underscores and spaces, with outlines_per_row outlines in one row;
-           otherwise function will return False."""
-    first_grid = grids[0]
-    num_rows = len(first_grid)
-    num_cols = len(first_grid[0])
+           otherwise the function will return False."""
+    num_rows = len(grids[0])
+    num_cols = len(grids[0][0])
     # sorting strips according to length in decreasing order to make the problem easier
     strips = tuple(sorted(strips,key = len,reverse = True))
     outlines = ()
     for grid_values in grids:
-        # represent the grid as a dictionary for search
+        # represent a grid as a dictionary for search
         grid = {}
         for row in range(num_rows):
             for col in range(num_cols):
@@ -47,19 +46,17 @@ def depth_first_search(grid, num_cols, num_rows, strips, occupied_cells, placing
            each symbol of a string denote colour of the corresponding cell of the strip ('w' for white and 'b' for black).
            occupied_cells - tuple of tuples of two integers, where each tuple represent one cell that is under strip already.
            placing - tuple of tuples, each of which represnt one placed strip and consist of 3 parts:
-           1) tuple of two integers that represent position of left lower cell of the strip;
-           2) string: orientation of the strip ('horizontal' or 'vertical');
-           3) integer: length of the strip.
+           1) tuple of two integers that represent position of the left lower cell of a strip;
+           2) string: orientation of a strip ('horizontal' or 'vertical');
+           3) integer: length of a strip.
        Output:
            If search is successful, the function will return corresponding final placing;
            otherwise the function will return False."""
-    if strips == ():
+    if len(strips) == len(placing):
         # all strips are placed
         return placing
     # current strip of search
-    current_strip = strips[0]
-    # strips for further search
-    next_strips = strips[1:]
+    current_strip = strips[len(placing)]
     # position is used for search, representation is used for answer
     for (position,representation) in get_strip_positions(current_strip, num_cols, num_rows):
         position_is_possible = True
@@ -73,7 +70,7 @@ def depth_first_search(grid, num_cols, num_rows, strips, occupied_cells, placing
             for cell in position:
                 next_occupied_cells += (cell,)
             next_placing = placing + (representation,)
-            final_placing = depth_first_search(grid, num_cols, num_rows, next_strips, next_occupied_cells, next_placing)
+            final_placing = depth_first_search(grid, num_cols, num_rows, strips, next_occupied_cells, next_placing)
             if final_placing:
                 return final_placing
     return False
@@ -87,12 +84,11 @@ def get_strip_positions(strip, num_cols, num_rows):
        Output:
            generator that will generate potential positions of the strip on the grid with its representation as tuples of two elements:
            1) dictionary, where keys are tuples of two integers that represent cells of the grid,
-              and values are strings of one symbol, that denote colours of the cells of the strip ('w' for white and 'b' for black);
+              and values are strings of one symbol, that denote colour of the cells of the strip ('w' for white and 'b' for black);
            2) tuple of tuples, each of which represnt one placed strip and consist of 3 parts:
-              1) tuple of two integers that represent position of left lower cell of the strip;
-              2) string: orientation of the strip ('horizontal' or 'vertical');
-              3) integer: length of the strip."""
-    strip_len = len(strip)
+              1) tuple of two integers that represent position of the left lower cell of a strip;
+              2) string: orientation of a strip ('horizontal' or 'vertical');
+              3) integer: length of a strip."""
     # we should also consider reversed strip, if it is different from the original one
     reversed_strip = strip[::-1]
     if strip == reversed_strip:
@@ -101,32 +97,28 @@ def get_strip_positions(strip, num_cols, num_rows):
         patterns = (strip, reversed_strip)
     # generate horizontal placings of the strip 
     for row in range(num_rows):
-        for col in range(num_cols - strip_len + 1):
+        for col in range(num_cols - len(strip) + 1):
             for pattern in patterns:
                 position = {}
-                current_col = col
-                for colour in pattern:
-                    position[(current_col, row)] = colour
-                    current_col += 1
-                yield (position, ((col,row),'horizontal',strip_len))
+                for i in range(len(strip)):
+                    position[(col + i, row)] = pattern[i]
+                yield (position, ((col,row),'horizontal',len(strip)))
     # generate vertical placings of the strip 
     for col in range(num_cols):
-        for row in range(num_rows - strip_len + 1):
+        for row in range(num_rows - len(strip) + 1):
             for pattern in patterns:
                 position = {}
-                current_row = row
-                for colour in pattern:
-                    position[(col, current_row)] = colour
-                    current_row += 1
-                yield (position, ((col,row),'vertical',strip_len))
+                for i in range(len(strip)):
+                    position[(col, row + i)] = pattern[i]
+                yield (position, ((col,row),'vertical',len(strip)))
             
 def get_placing_outline(placing, num_cols, num_rows):
-    """Function that creates outline of the placing for output that consists of bars, underscores and spaces.
+    """Function that creates outline of a placing for output that consists of bars, underscores and spaces.
        Input:
            placing - tuple of tuples, each of which represnt one placed strip and consist of 3 parts:
-           1) tuple of two integers that represent position of left lower cell of the strip;
-           2) string: orientation of the strip ('horizontal' or 'vertical');
-           3) integer: length of the strip.
+           1) tuple of two integers that represent position of the left lower cell of a strip;
+           2) string: orientation of a strip ('horizontal' or 'vertical');
+           3) integer: length of a strip.
            num_cols - integer: number of columns in the grid.
            num_rows - integer: number of rows in the grid.
        Output:
@@ -134,16 +126,15 @@ def get_placing_outline(placing, num_cols, num_rows):
     cells_without_left_border = ()
     cells_without_lower_border = ()
     for strip in placing:
-        first_cell = strip[0]
-        col,row = first_cell[0],first_cell[1]
+        col, row = strip[0][0], strip[0][1]
         orientation = strip[1]
         strip_len = strip[2]
         if orientation == 'horizontal':
-            for strip_index in range(1, strip_len):
-                cells_without_left_border += ((col + strip_index, row),)
+            for i in range(1, strip_len):
+                cells_without_left_border += ((col + i, row),)
         elif orientation == 'vertical':
-            for strip_index in range(1, strip_len):
-                cells_without_lower_border += ((col, row + strip_index),)
+            for i in range(1, strip_len):
+                cells_without_lower_border += ((col, row + i),)
     outline = []
     # decremental loop for rows with one additional row for the upper border of the grid
     for row in range(num_rows,-1,-1):
@@ -151,40 +142,38 @@ def get_placing_outline(placing, num_cols, num_rows):
         # loop for cols with one additional col for the right border of the grid
         for col in range(num_cols+1):
             cell = (col,row)
-            if row < num_rows and (col == 0 or col == num_cols or not cell in cells_without_left_border):
-                level += '|'
-            else:
+            if row == num_rows or cell in cells_without_left_border:
                 level += ' '
+            else:
+                level += '|'
             if col < num_cols:
-                if row == 0 or row == num_rows or not cell in cells_without_lower_border:
-                    level += '_'
-                else:
+                if cell in cells_without_lower_border:
                     level += ' '
+                else:
+                    level += '_'
         outline.append(level)
     return outline
 
 def get_output(outlines, outlines_per_row):
     """Function that combines outlines to create output with outlines_per_row outlines in one row.
        Input:
-           outlines - tuple of lists of strings, where each of the lists represent outline of one placing;
-           each string represent one horizontal level of the outline and consists of bars, underscores and spaces.
+           outlines - tuple of lists of strings, where each list represent an outline of one placing
+           and each string, consisted of bars, underscores and spaces, represent one horizontal level of the outline.
            outlines_per_row - integer: amount of outlines in one row of output.
        Output:
            string, where outlines of the placings arranged in outlines_per_row outlines in one row with one space between them,
            and there is a new line after each horizontal level of one row and between different rows."""
-    outlines_len = len(outlines)
     output = ''
     # determine starting index for every row
-    for first_index in range(0, outlines_len, outlines_per_row):
-        last_index = min(first_index + outlines_per_row, outlines_len)
+    for first_index in range(0, len(outlines), outlines_per_row):
+        last_index = min(first_index + outlines_per_row, len(outlines))
         # add first outline to the row
         one_row = outlines[first_index]
         # add other outlines to the row
-        for current_outline in outlines[first_index+1:last_index]:
-            level_index = 0
-            for level in current_outline:
-                one_row[level_index] += ' ' + level
-                level_index += 1
+        for i in range(first_index + 1, last_index):
+            current_outline = outlines[i]
+            for level_index in range(len(current_outline)):
+                one_row[level_index] += ' ' + current_outline[level_index]
         for level in one_row:
             output += level + '\n'
     return output
